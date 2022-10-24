@@ -1,0 +1,20 @@
+1-Harry Potter y la piedra Filosofal-2.32-Fantasía/Aventura-5
+2-Harry Potter y la camara secreta-2.41-Fantasía/Aventura-3
+3-Harry Potter y el prisionero de Azkaban-2.22-Fantasía/Aventura-4
+4-Harry Potter y el caliz de fuego-2.37-Fantasía/Aventura-5
+5-Harry Potter y la Orden del Fenix-2.18-Fantasía/Aventura-4
+6-Harry Potter y el misterio del Principe-2.33-Fantasía/Aventura-3
+7-Harry Potter y las Reliquias de la Muerte-2.27-Fantasía/Aventura-5
+8-Harry Potter y las Reliquias de la Muerte2-2.10-Fantasía/Aventura-5
+9-Animales fantásticos y dónde encontrarlos-2.16-Fantasía/Aventura-4
+10-Animales fantásticos: los crímenes de Grindelwald-2.14-Fantasía/Aventura-4
+11-Animales fantásticos: Los secretos de Dumbledore-2.23-Fantasía/Aventura-3
+12-Crepusculo-2.02-Romance/Fantasía-3
+13-Crepusculo:Luna Nueva-2.10-Romance/Fantasía-2
+14-Crepusculo:Ecplise-2.04-Romance/Fantasía-4
+15-Crepusculo:Amanecer-1.57-Romance/Fantasía-5
+16-Crepusculo:Amanecer2-1.55-Romance/Fantasía-5
+17-A todos los chicos de los que me enamore-1.40-Comedia Romantica-5
+18-A todos los chicos de los que me enamore 2-1.44-Comedia Romantica-5
+19-A todos los chicos de los que me enamore 3-1.50-Comedia Romantica-5
+20-El stand de los besos-1.46-Comedia Romantica-5

@@ -1,0 +1,41 @@
+T01S01C01-Euphoria:Piloto-0.53-Drama-5
+T01S01C02-Euphoria:Stuntin Like My Daddy-1.00-Drama-5
+T01S01C03-Euphoria:Made You Look-0.56-Drama-5
+T01S01C04-Euphoria:Shock One-0.56-Drama-5
+T01S01C05-Euphoria:03 Bonnie and Clyde-0.52-Drama-5
+T01S01C06-Euphoria:The Next Episode-0.50-Drama-5
+T01S01C07-Euphoria:The Trials and Tribulations of Trying to Pee While Depressed-0.59-Drama-5
+T01S01C08-Euphoria:And Salt the Earth Behind You-1.04-Drama-5
+T01S02C01-Euphoria:Trying to Get to Heaven Before They Close the Door-1.01-Drama-5
+T01S02C02-Euphoria:Out of Touch-0.57-Drama-5
+T01S02C03-Euphoria:Ruminations: Big and Little Bullys-1.00-Drama-5
+T01S02C04-Euphoria:You Who Cannot See, Think of Those Who Can-1.02-Drama-5
+T01S02C05-Euphoria:Stand Still Like the Hummingbird-0.54-Drama-5
+T01S02C06-Euphoria:A Thousand Little Trees of Blood-1.00-Drama-5
+T01S02C07-Euphoria:The Theater and It's Double-0.58-Drama-5
+T01S02C08-Euphoria:All My Life, My Heart Has Yearned for a Thing I Cannot Name-1.01-Drama-5
+T02S01C01-Los Juegos del Calamar:Luz Roja,Luz Verde-1-Suspenso-4
+T02S01C02-Los Juegos del Calamar:Infierno-1.03-Suspenso-4
+T02S01C03-Los Juegos del Calamar:El hombre del paraguas-0.54-Suspenso-4
+T02S01C04-Los Juegos del Calamar:No abandones el equipo-0.54-Suspenso-4
+T02S01C05-Los Juegos del Calamar:Un mundo justo-0.52-Suspenso-4
+T02S01C06-Los Juegos del Calamar:Gganbu-1.02-Suspenso-4
+T02S01C07-Los Juegos del Calamar:Los VIP-0.58-Suspenso-4
+T02S01C08-Los Juegos del Calamar:El lider-0.32-Suspenso-4
+T02S01C09-Los Juegos del Calamar:Un día de suerte-0.56-Suspenso-4
+T03S01C01-Destino La Saga Winx:Con un Hada , de la mano-0.53-Fantasia-1
+T03S01C02-Destino La Saga Winx:Aqui no hay extraños-0.48-Fantasia-2
+T03S01C03-Destino La Saga Winx:Pesadas esperanzas mortales-0.52-Fantasia-2
+T03S01C04-Destino La Saga Winx:Angeles caidos-0.47-Fantasia-3
+T03S01C05-Destino La Saga Winx:Marchitarse en la verdad-0.50-Fantasia-3
+T03S01C06-Destino La Saga Winx:Un corazon fanatico-0.54-Fantasia-3
+T04S01C01-Recursos Humanos:El parto-0.25-Comedia-4
+T04S01C02-Recursos Humanos:Dia de la capacitación-0.26-Comedia-3
+T04S01C03-Recursos Humanos:Mamis malas-0.26-Comedia-4
+T04S01C04-Recursos Humanos:Rutgers, un paraiso de amor-0.26-Comedia-4
+T04S01C05-Recursos Humanos:El amor en los tiempos de postparto-0.26-Comedia-4
+T04S01C06-Recursos Humanos:El angel de la adicción-0.26-Comedia-3
+T04S01C07-Recursos Humanos:Convencion internacional de criaturas-0.28-Comedia-3
+T04S01C08-Recursos Humanos:La luz-0.27-Comedia-3
+T04S01C09-Recursos Humanos:El fin se acerca-0.28-Comedia-3
+T04S01C10-Recursos Humanos:Tormenta de M*erda-0.28-Comedia-3
