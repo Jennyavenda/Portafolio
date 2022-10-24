@@ -1,328 +1,126 @@
-// Jennifer Avendaño Sánchez A01656951
-// Julia Pasten Da Silva A01660665
 #include <iostream>
-#include <fstream>
-#include <vector>
-#ifndef _video_
-#define _video_
-#include "Video.h"
-#endif
+#include "Playlist.h"
+#include "Genero.h"
+#include "Artista.h"
 
 using namespace std;
-//Peliculas
-void cargarPelis(vector<Video> &);
-//Episodio
-void cargarSeries(vector<Video> &);
-//Otras
-void filVidDur(vector<Video>& vec);
-void filVidGen(vector<Video>& vec);
-void filVidCal(vector<Video>& vec);
-void filVidSin(vector<Video>& vec);
-void filEpi(vector<Video>& vec);
-void mosVidS(vector<Video>& vec);
-void calVids(vector<Video>& vec);
-void mosVidP(vector<Video>& vec);
-void calVidP(vector<Video>& vec);
 
 int main(){
-    vector <Video> series;
-    cargarSeries(series);
-    vector <Video> peliculas;
-    cargarPelis(peliculas);
+    // CREACIÓN DE GENEROS
+    Genero popes("Pop en español");
+    Genero reg("Reggaeton");
+    Genero popin("Pop en ingles");
 
-    int tam =series.size();
-    for (int i=0;i<tam;i++){
-        if(series[i].getGenero()!= series[i+1].getGenero()){
-            std::cout<< series[i].getGenero()<<std::endl;
+    // CANCIONES POP ESPAÑOL
+    Artista tor("Dorian","La Tormenta de Arena","vivo");
+    Artista viv("Maná","Vivir Sin Aire","vivo");
+    Artista dej("Chayanne","Dejaría todo","vivo");
+    Artista cul("Luis Miguel","Culpable O No","vivo");
+    // CANCIONES POP INGLES
+    Artista red("Childdish Gambino","Redbone","vivo");
+    Artista hel("Disclosure & London Grammar","Help Me Lose My Mind","vivo");
+    Artista sme("Nirvana","Smells Like Teen Spirit","vivo");
+    Artista wan("Arctic Monkeys","Do I Wanna Know?","vivo");
+    // CANCIONES REGGAETON
+    Artista play("Zion & Lennox","La player","vivo");
+    Artista est("Jhay Cortez","Está deja","vivo");
+    Artista todo("Rauw Alejandro","Todo de ti","vivo");
+    Artista gust("Wisin & Yandel","Algo me gusta de ti","vivo");
+
+    // AGREGA A GENERO POP ESPAÑOL
+    popes.agregarArtista(tor,0);
+    popes.agregarArtista(viv,1);
+    popes.agregarArtista(dej,2);
+    popes.agregarArtista(cul,3);
+    // AGREGA A GENERO POP INGLES
+    popin.agregarArtista(red,0);
+    popin.agregarArtista(hel,1);
+    popin.agregarArtista(sme,2);
+    popin.agregarArtista(wan,3);
+    // AGREGA A GENERO REGGAETON
+    reg.agregarArtista(play,0);
+    reg.agregarArtista(est,1);
+    reg.agregarArtista(todo,2);
+    reg.agregarArtista(gust,3);
+
+    Playlist playlist("Playlist");
+    playlist.agregarArtista(tor,0);
+    playlist.agregarArtista(viv,1);
+    playlist.agregarArtista(dej,2);
+    playlist.agregarArtista(cul,3);
+    playlist.agregarArtista(red,5);
+    playlist.agregarArtista(hel,6);
+    playlist.agregarArtista(sme,7);
+    playlist.agregarArtista(wan,8);
+    playlist.agregarArtista(play,9);
+    playlist.agregarArtista(est,10);
+    playlist.agregarArtista(todo,11);
+    playlist.agregarArtista(gust,12);
+
+    
+    int respuesta;
+    cout<<"¿Qué quieres que haga?"<<endl<<"1. Ver playlist"<<endl<<"2. Ver los géneros"<<endl<<"3. Sustituir una canción"<<endl<<"4. Salir"<<endl<<"----- "; 
+    cin>>respuesta;
+
+    // CICLO
+    while(respuesta != 4){
+        if (respuesta==1){
+            playlist.imprimirArtistas();
         }
+        else if(respuesta==2){
+            cout<<"Escoge el género que deseas ver"<<endl<<"1. Reggaeton"<<endl<<"2. Pop en ingles"<<endl<<"3. Pop en español"<<endl<<"--- ";
+            int selecGen;
+            cin>>selecGen;
+            if (selecGen==1){
+                reg.imprimirArtistas();
+            }else if(selecGen==2){
+                popin.imprimirArtistas();
+            }else{
+                popes.imprimirArtistas();
+            }
+        }
+        else if(respuesta==3){
+            int gencambio;
+            int posnueva;
+            string nombren;
+            string canciónn;
+            string estadon;
+            cout<<"Escoge el género que deseas cambiar la canción:"<<endl<<"1. Reggaeton"<<endl<<"2. Pop en ingles"<<endl<<"3. Pop en español"<<endl<<"--- ";
+            cin>>gencambio;
+            if (gencambio==1){
+                reg.imprimirArtistas();
+            }else if(gencambio==2){
+                popin.imprimirArtistas();
+            }else{
+                popes.imprimirArtistas();
+            }
+            cout<<"Escoge la posición de la canción que deseas sustituir:"<<endl<<"-- ";
+            cin>>posnueva;
+            
+            cout<<"¿Quién es el artista de tu nueva canción?"<<endl<<"-- ";
+            cin>>nombren;
+            cout<<"¿Cómo se llama tu nueva canción?"<<endl<<"-- ";
+            cin>>canciónn;
+            cout<<"¿El nuevo artitas está vivo o muerto?"<<endl<<"-- ";
+            cin>>estadon;
+            if (gencambio==1){
+                Artista nuev(nombren, canciónn, estadon);
+                reg.agregarArtista(nuev,posnueva-1);
+                reg.imprimirArtistas();
+            }else if(gencambio==2){
+                Artista nuev(nombren, canciónn, estadon);
+                popin.agregarArtista(nuev,posnueva-1);
+                popin.imprimirArtistas();
+            }else{
+                Artista nuev(nombren, canciónn,estadon);
+                popes.agregarArtista(nuev,posnueva-1);
+                popes.imprimirArtistas();
+            }
+        }
+        cout<<endl<<"¿Qué quieres que haga?"<<endl<<"1. Ver playlist"<<endl<<"2. Ver los géneros"<<endl<<"3. Sustituir una canción"<<endl<<"4. Salir"<<endl<<"----- ";  
+        cin>>respuesta;
     }
+    cout<<"Un placer ayudarte :)"<<endl;
 
-    // Qué hacer
-    string hacer;   
-    cout << "¿Qué quieres hacer?" << endl;
-    cout << "a. Ver peliculas o series" <<endl;
-    cout << "b. Calificar peliculas o series" <<endl;
-    cout << "c. Salir" <<endl;
-    cin >> hacer;
-    cout << "------" <<endl;
-    while(hacer != "c"){
-        if (hacer=="a"){
-            // Busca pelicula o serie
-            string buscar; 
-            cout << "¿Qué quieres ver?" << endl;
-            cout << "a. Películas" <<endl;
-            cout << "b. Series" <<endl;
-            cin >> buscar;
-            cout << "------" <<endl;
-            if (buscar=="a"){
-                // Busca por un filtro
-                string filtro;  
-                cout << "Filtar en orden por:" << endl;
-                cout << "a. Duración" <<endl;
-                cout << "b. Género" <<endl;
-                cout << "c. Calificación" <<endl;
-                cout << "d. Sin orden" <<endl;
-                cin >> filtro;
-                cout << "------" <<endl;
-                if (filtro=="a"){filVidDur(peliculas);}
-                else if (filtro=="b"){filVidGen(peliculas);}
-                else if (filtro=="c"){filVidCal(peliculas);}
-                else if (filtro=="d"){filVidSin(peliculas);}
-                else{cout<<"Valor inválido, reingrese valor"<<endl;}
-            }
-            else if(buscar=="b"){
-                // Busca por un filtro
-                mosVidS(series);
-                filEpi(series);
-            }  
-            cout<<endl; 
-            cout << "¿Qué quieres hacer?" << endl;
-            cout << "a. Ver peliculas o series" <<endl;
-            cout << "b. Calificar peliculas o series" <<endl;
-            cout << "c. Salir" <<endl;
-            cin >> hacer;
-            cout << "------" <<endl;
-
-        }
-        else if(hacer=="b") {
-            // Busca pelicula o serie
-            string buscar;  
-            cout << "¿Qué quieres calificar?" << endl;
-            cout << "a. Películas" <<endl;
-            cout << "b. Series" <<endl;
-            cout << "------" <<endl;
-            cin >> buscar;
-            if (buscar=="a"){
-                mosVidP(peliculas);
-                calVidP(peliculas);
-            }
-            else if(buscar=="b"){
-                mosVidS(series);
-                calVids(series);
-            }
-            cout<<endl;
-            cout << "¿Qué quieres hacer?" << endl;
-            cout << "a. Ver peliculas o series" <<endl;
-            cout << "b. Calificar peliculas o series" <<endl;
-            cout << "c. Salir" <<endl;
-            cin >> hacer;
-            cout << "------" <<endl;
-        }
-    }    
-    if(hacer=="c"){
-        cout<<"byee"<<endl;
-    }
+    return 0;
 }
-
-void cargarSeries(vector<Video>& ve){
-    string myEpi; 
-    ifstream MyReadEpi("Episodios.txt");
-    while (getline(MyReadEpi, myEpi)){
-        //Separación del texto
-        std::string id = myEpi.substr(0, myEpi.find("-"));
-        myEpi = myEpi.substr(myEpi.find("-")+1, myEpi.length());
-        std::string nombre = myEpi.substr(0, myEpi.find("-"));
-        float duracion = std::stof(myEpi.substr(myEpi.find("-")+1, myEpi.find("-")+1));
-        myEpi = myEpi.substr(myEpi.find("-",myEpi.find("-")+2)+1, myEpi.length());
-        std::string genero = myEpi.substr(0, myEpi.find("-"));
-        int calificacion = std::stoi(myEpi.substr(myEpi.find("-")+1,myEpi.length()));
-        //Ingreso de valores a Video
-        Video video_temp(id, nombre, duracion,genero,calificacion);
-        ve.push_back(video_temp);
-    }
-    MyReadEpi.close();
-};
-void cargarPelis(vector<Video>& vp){
-    string myPeli; 
-    ifstream MyReadPeli("Pelicula.txt");
-    while (getline(MyReadPeli, myPeli)){
-        //Separación del texto
-        std::string id = myPeli.substr(0, myPeli.find("-"));
-        myPeli = myPeli.substr(myPeli.find("-")+1, myPeli.length());
-        std::string nombre = myPeli.substr(0, myPeli.find("-"));
-        float duracion = std::stof(myPeli.substr(myPeli.find("-")+1, myPeli.find("-")+1));
-        myPeli = myPeli.substr(myPeli.find("-",myPeli.find("-")+2)+1, myPeli.length());
-        std::string genero = myPeli.substr(0, myPeli.find("-"));
-        int calificacion = std::stoi(myPeli.substr(myPeli.find("-")+1,myPeli.length()));
-        //Ingreso de valores a Video
-        Video video_temp(id, nombre, duracion,genero,calificacion);
-        vp.push_back(video_temp);
-    }
-    MyReadPeli.close();
-};
-void filVidDur(vector<Video>& vec){
-    float dur;
-    std::cout << "Dame la duración que buscas: " << std::endl;
-    cin >> dur;
-    for(Video v : vec){
-        if(v.getDuracion() >= dur){
-            v.toStr();
-        }
-    }
-};
-void filVidGen(vector<Video>& vec){
-    std::cout<< "Estos son los géneros: ";
-    std::cout<<std::endl;
-    int tam =vec.size();
-    for (int i=0;i<tam;i++){
-        if(vec[i].getGenero()!= vec[i+1].getGenero()){
-            std::cout<< vec[i].getGenero()<<std::endl;
-        }
-    }
-    string gen;
-    std::cout << "Dame el género que buscas: " << std::endl;
-    cin >> gen;
-    for(Video v : vec){
-        if(v.getGenero() == gen){
-            v.toStr();
-        }
-    }
-};
-void filVidCal(vector<Video>& vec){
-    int cal;
-    std::cout << "Dame la calificación que buscas: " << std::endl;
-    cin >> cal;
-    for(Video v : vec){
-        if(v.getCalificacion() >= cal){
-            v.toStr();
-        }
-    }
-};
-void filVidSin(vector<Video>& vec){
-    for(Video v : vec){
-            v.toStr();
-    }
-};
-void filEpi(vector<Video>& vec){
-    cout<<endl;
-    //Reciber Id de clase
-    string idinci;
-    cout <<"Dame el Id de la serie cuyos datos quieres filtrar"<<endl;
-    cin>>idinci;
-
-    //Filtra
-    cout<<endl;
-    string filtro;  
-    cout << "Filtar en orden por:" << endl;
-    cout << "a. Duración" <<endl;
-    cout << "b. Género" <<endl;
-    cout << "c. Calificación" <<endl;
-    cout << "d. Sin orden" <<endl;
-    cout << "------" <<endl;
-    cin >> filtro;
-
-    if (filtro=="a"){
-        float dur;
-        std::cout << "Dame la duración que buscas: " << std::endl;
-        cin >> dur;
-        int tam =vec.size();
-        for (int i=0;i<tam;i++){
-            if(vec[i].getId().substr(0,3) == idinci & vec[i].getDuracion() >= dur){
-                vec[i].toStr();
-            }
-        }
-    }
-    else if (filtro=="b"){
-        std::cout<< "Estos son los géneros: ";
-        std::cout<<std::endl;
-        int tam =vec.size();
-        for (int i=0;i<tam;i++){
-            if(vec[i].getId().substr(0,3) == idinci & vec[i].getGenero()!= vec[i+1].getGenero()){
-                std::cout<< vec[i].getGenero()<<std::endl;
-            }
-        }
-
-        string gen;
-        std::cout << "Dame el género que buscas: " << std::endl;
-        cin >> gen;
-        for (int i=0;i<tam;i++){
-            if(vec[i].getId().substr(0,3) == idinci & vec[i].getGenero() >= gen){
-                vec[i].toStr();
-            }
-        }
-    }
-    else if (filtro=="c"){
-        int cal;
-        std::cout << "Dame la calificación que buscas: " << std::endl;
-        cin >> cal;
-        int tam =vec.size();
-        for (int i=0;i<tam;i++){
-            if(vec[i].getId().substr(0,3) == idinci & vec[i].getCalificacion() >= cal){
-                vec[i].toStr();
-            }
-        }
-    }
-    else if (filtro=="d"){
-        int tam =vec.size();
-        for (int i=0;i<tam;i++){
-            if(vec[i].getId().substr(0,3) == idinci){
-                vec[i].toStr();
-            }
-        }
-    }
-    else{cout<<"Valor inválido, reingrese valor"<<endl;}
-};
-void mosVidS(vector<Video>& vec){
-    std::cout<< "Estas son las series: ";
-    std::cout<<std::endl;
-    int tam =vec.size();
-    for (int i=0;i<tam;i++){
-        string v =vec[i].getNombre();
-        string def;
-        def = v.substr(0, v.find(":"));
-        if(def!= vec[i+1].getNombre().substr(0, v.find(":"))){
-            cout<< v.substr(0, v.find(":"))<<endl<<" su Id es: "<<vec[i].getId().substr(0,3)<<endl;
-        }
-    }
-}
-void calVids(vector<Video>& vec){
-    cout<<endl;
-    //Reciber Id de clase
-    string idinci;
-    cout <<"Dame el Id de la serie"<<endl;
-    cin>>idinci;
-    for(Video v : vec){
-        int i = 0;
-        int vs = vec.size();
-        if(vec[i].getId().substr(0,3) == idinci & i <vs){
-            v.toStrS();
-            i+=1;
-        }
-    }
-    // Da el id del objeto que quiere calificar
-    string seleccion;
-    cout << "Ingresa el id para calificar:      ";
-    cin >> seleccion; 
-    int tam =vec.size();
-    for (int i=0;i<tam;i++){
-        if(vec[i].getId()== seleccion){
-            std::cout<< "Id enocntrado, su título es: "<<vec[i].getNombre()<<std::endl;
-            //Calificar el id
-            int califica;
-            cout << "¿Cuál es tu calificación para este título?(en entero):     ";
-            cin >> califica;
-            vec[i].setCalificacion(califica);
-        }
-    }
-}
-void mosVidP(vector<Video>& vec){
-    for(Video v: vec){
-        v.toStrS();
-    }
-};
-void calVidP(vector<Video>& vec){
-    string seleccion;
-    cout << "Ingresa el id para calificar:      ";
-    cin >> seleccion; 
-    int tam =vec.size();
-    for (int i=0;i<tam;i++){
-        if(vec[i].getId()== seleccion){
-            std::cout<< "Id enocntrado, su título es: "<<vec[i].getNombre()<<std::endl;
-            //Calificar el id
-            int califica;
-            cout << "¿Cuál es tu calificación para este título?(en entero):     ";
-            cin >> califica;
-            vec[i].setCalificacion(califica);
-        }
-    }
-};
