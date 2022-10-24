@@ -1,126 +1,319 @@
+//Luis Armando Mandujano Chávez A01655899
+//Pablo Ceballos G. A01660148
+//Jennifer Avendaño Sánchez A01656951
+#include <cstddef>
 #include <iostream>
-#include "Playlist.h"
-#include "Genero.h"
-#include "Artista.h"
-
+#include <time.h>
+#include <string>
+#include <fstream>
+#include <sstream>
 using namespace std;
+#include "persona.h"
+#include "lista.h"
+#include "hashtablevd.h"
 
-int main(){
-    // CREACIÓN DE GENEROS
-    Genero popes("Pop en español");
-    Genero reg("Reggaeton");
-    Genero popin("Pop en ingles");
+int stringToInt(string s){
+  int n = 0;
+  stringstream ssn;
+  ssn << s;
+  ssn >> n;
+  return n;
+}
 
-    // CANCIONES POP ESPAÑOL
-    Artista tor("Dorian","La Tormenta de Arena","vivo");
-    Artista viv("Maná","Vivir Sin Aire","vivo");
-    Artista dej("Chayanne","Dejaría todo","vivo");
-    Artista cul("Luis Miguel","Culpable O No","vivo");
-    // CANCIONES POP INGLES
-    Artista red("Childdish Gambino","Redbone","vivo");
-    Artista hel("Disclosure & London Grammar","Help Me Lose My Mind","vivo");
-    Artista sme("Nirvana","Smells Like Teen Spirit","vivo");
-    Artista wan("Arctic Monkeys","Do I Wanna Know?","vivo");
-    // CANCIONES REGGAETON
-    Artista play("Zion & Lennox","La player","vivo");
-    Artista est("Jhay Cortez","Está deja","vivo");
-    Artista todo("Rauw Alejandro","Todo de ti","vivo");
-    Artista gust("Wisin & Yandel","Algo me gusta de ti","vivo");
+//Funcion para leer el archivo .csv y creae el censo en una tabla hash
+void censoHash(string &comando){
+  int totalDatosArchivo = 0;
+  string noLinea;
+  ifstream bitacora;
 
-    // AGREGA A GENERO POP ESPAÑOL
-    popes.agregarArtista(tor,0);
-    popes.agregarArtista(viv,1);
-    popes.agregarArtista(dej,2);
-    popes.agregarArtista(cul,3);
-    // AGREGA A GENERO POP INGLES
-    popin.agregarArtista(red,0);
-    popin.agregarArtista(hel,1);
-    popin.agregarArtista(sme,2);
-    popin.agregarArtista(wan,3);
-    // AGREGA A GENERO REGGAETON
-    reg.agregarArtista(play,0);
-    reg.agregarArtista(est,1);
-    reg.agregarArtista(todo,2);
-    reg.agregarArtista(gust,3);
-
-    Playlist playlist("Playlist");
-    playlist.agregarArtista(tor,0);
-    playlist.agregarArtista(viv,1);
-    playlist.agregarArtista(dej,2);
-    playlist.agregarArtista(cul,3);
-    playlist.agregarArtista(red,5);
-    playlist.agregarArtista(hel,6);
-    playlist.agregarArtista(sme,7);
-    playlist.agregarArtista(wan,8);
-    playlist.agregarArtista(play,9);
-    playlist.agregarArtista(est,10);
-    playlist.agregarArtista(todo,11);
-    playlist.agregarArtista(gust,12);
-
-    
-    int respuesta;
-    cout<<"¿Qué quieres que haga?"<<endl<<"1. Ver playlist"<<endl<<"2. Ver los géneros"<<endl<<"3. Sustituir una canción"<<endl<<"4. Salir"<<endl<<"----- "; 
-    cin>>respuesta;
-
-    // CICLO
-    while(respuesta != 4){
-        if (respuesta==1){
-            playlist.imprimirArtistas();
-        }
-        else if(respuesta==2){
-            cout<<"Escoge el género que deseas ver"<<endl<<"1. Reggaeton"<<endl<<"2. Pop en ingles"<<endl<<"3. Pop en español"<<endl<<"--- ";
-            int selecGen;
-            cin>>selecGen;
-            if (selecGen==1){
-                reg.imprimirArtistas();
-            }else if(selecGen==2){
-                popin.imprimirArtistas();
-            }else{
-                popes.imprimirArtistas();
-            }
-        }
-        else if(respuesta==3){
-            int gencambio;
-            int posnueva;
-            string nombren;
-            string canciónn;
-            string estadon;
-            cout<<"Escoge el género que deseas cambiar la canción:"<<endl<<"1. Reggaeton"<<endl<<"2. Pop en ingles"<<endl<<"3. Pop en español"<<endl<<"--- ";
-            cin>>gencambio;
-            if (gencambio==1){
-                reg.imprimirArtistas();
-            }else if(gencambio==2){
-                popin.imprimirArtistas();
-            }else{
-                popes.imprimirArtistas();
-            }
-            cout<<"Escoge la posición de la canción que deseas sustituir:"<<endl<<"-- ";
-            cin>>posnueva;
-            
-            cout<<"¿Quién es el artista de tu nueva canción?"<<endl<<"-- ";
-            cin>>nombren;
-            cout<<"¿Cómo se llama tu nueva canción?"<<endl<<"-- ";
-            cin>>canciónn;
-            cout<<"¿El nuevo artitas está vivo o muerto?"<<endl<<"-- ";
-            cin>>estadon;
-            if (gencambio==1){
-                Artista nuev(nombren, canciónn, estadon);
-                reg.agregarArtista(nuev,posnueva-1);
-                reg.imprimirArtistas();
-            }else if(gencambio==2){
-                Artista nuev(nombren, canciónn, estadon);
-                popin.agregarArtista(nuev,posnueva-1);
-                popin.imprimirArtistas();
-            }else{
-                Artista nuev(nombren, canciónn,estadon);
-                popes.agregarArtista(nuev,posnueva-1);
-                popes.imprimirArtistas();
-            }
-        }
-        cout<<endl<<"¿Qué quieres que haga?"<<endl<<"1. Ver playlist"<<endl<<"2. Ver los géneros"<<endl<<"3. Sustituir una canción"<<endl<<"4. Salir"<<endl<<"----- ";  
-        cin>>respuesta;
+  if(comando == "bitacora.csv"){
+    bitacora.open(comando);
+    if (bitacora.is_open()){
+      while (getline(bitacora, noLinea)){
+        totalDatosArchivo++;
+      }
     }
-    cout<<"Un placer ayudarte :)"<<endl;
 
-    return 0;
+    bitacora.close();
+  }
+  
+
+  string linea1;
+  string idS, fNombre, lNombre, genero, nacimiento, telefonoS, email, zipS, ciudad, estado;
+  int id, telefono, zip;
+
+  Hashtable<string, LinkedList<Persona> > censo(totalDatosArchivo -1);
+
+  bitacora.open(comando);
+  getline(bitacora, linea1);
+  for(int i = 0; i < totalDatosArchivo-1; i++){
+    getline(bitacora, noLinea);
+
+    idS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    fNombre = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    lNombre = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    genero = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    nacimiento = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    telefonoS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    email = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    zipS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    ciudad = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    estado = noLinea.substr(0, noLinea.length());
+
+    id = stringToInt(idS);
+    telefono = stringToInt(telefonoS);
+    zip = stringToInt(zipS);
+
+    Persona personita(id, fNombre, lNombre, genero, nacimiento, telefono, email, zip, ciudad, estado);
+
+
+    if(censo.contains(ciudad)){
+      LinkedList<Persona> Pr = censo.get(ciudad);
+      Pr.addLast(personita);
+      censo.put(ciudad, Pr);
+    }
+    else{
+      LinkedList<Persona> Pr2;
+      Pr2.addLast(personita);
+      censo.put(ciudad, Pr2);
+    }
+  }
+  censo.print();
+  //cout << censo.Size() << endl;
+  bitacora.close();
+}
+
+void ordenStack(string &comando){
+  int totalDatosArchivo = 0;
+  string noLinea;
+  ifstream bitacora;
+
+  if(comando == "bitacora.csv"){
+    bitacora.open(comando);
+    if (bitacora.is_open()){
+      while (getline(bitacora, noLinea)){
+        totalDatosArchivo++;
+      }
+    }
+
+    bitacora.close();
+  
+  }  
+
+  Stack<Persona> stack1;
+  Stack<Persona> stack2;
+  string linea1;
+  string idS, fNombre, lNombre, genero, nacimiento, telefonoS, email, zipS, ciudad, estado;
+  int id, telefono, zip;
+
+  bitacora.open(comando);
+  getline(bitacora, linea1);
+  for(int i = 0; i < totalDatosArchivo-1; i++){
+    getline(bitacora, noLinea);
+
+    idS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    fNombre = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    lNombre = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    genero = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    nacimiento = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    telefonoS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    email = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    zipS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    ciudad = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    estado = noLinea.substr(0, noLinea.length());
+
+    id = stringToInt(idS);
+    telefono = stringToInt(telefonoS);
+    zip = stringToInt(zipS);
+
+    Persona personita(id, fNombre, lNombre, genero, nacimiento, telefono, email, zip, ciudad, estado);
+    stack1.push(personita);
+
+  }
+
+  bitacora.close();
+  
+
+  while(!stack1.is_empty()){
+    string temporal = stack1.peek().getLastName();
+    Persona tempPersona = stack1.peek();
+    stack1.pop();
+
+    while(!stack2.is_empty() && stack2.peek() > temporal){
+      stack1.push(stack2.peek());
+      stack2.pop();
+    }
+
+    stack2.push(tempPersona);
+  }
+
+  while(!stack2.is_empty()){
+    cout << stack2.peek() << endl;
+    stack2.pop();
+  }
+
+
+}
+
+void zipQueue(string &comando){
+  int totalDatosArchivo = 0;
+  string noLinea;
+  ifstream bitacora;
+
+  if(comando == "bitacora.csv"){
+    bitacora.open(comando);
+    if (bitacora.is_open()){
+      while (getline(bitacora, noLinea)){
+        totalDatosArchivo++;
+      }
+    }
+
+    bitacora.close();
+  
+  }  
+
+  Queue<Persona> zips;
+  string linea1;
+  string idS, fNombre, lNombre, genero, nacimiento, telefonoS, email, zipS, ciudad, estado;
+  int id, telefono, zip;
+
+  bitacora.open(comando);
+  getline(bitacora, linea1);
+  for(int i = 0; i < totalDatosArchivo-1; i++){
+    getline(bitacora, noLinea);
+
+    idS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    fNombre = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    lNombre = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    genero = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    nacimiento = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    telefonoS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    email = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    zipS = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    ciudad = noLinea.substr(0, noLinea.find(","));
+    noLinea = noLinea.substr(noLinea.find(",")+1, noLinea.length());
+
+    estado = noLinea.substr(0, noLinea.length());
+
+    id = stringToInt(idS);
+    telefono = stringToInt(telefonoS);
+    zip = stringToInt(zipS);
+
+    Persona personita(id, fNombre, lNombre, genero, nacimiento, telefono, email, zip, ciudad, estado);
+    zips.enqueue(personita);
+
+  }
+
+  bitacora.close();
+  while(!zips.is_empty()){
+    cout << zips.dequeueMin() << endl;
+  }
+
+}
+
+
+
+
+int main(int argc, char**argv) {
+
+  system("cls");
+  string entrada;
+  cout << "Ingrese el nombre del archivo porfavor: " << endl;
+  cin >> entrada;
+  cout << endl;
+  string nombre = entrada;
+  system("cls");
+
+  int opcion;
+  do{
+    cout << "####### MENU PRINCIPAL #######" << endl;
+    cout << "Seleccione la opcion que desee realizar" << endl;
+    cout << endl;
+    cout << "1. Despliega el registro de ciudades junto con sus habitantes" << endl;
+    cout << "2. Despliega la lista de habitantes ordenada por apellidos" << endl;
+    cout << "3. Despliega la lista de habitantes ordenada zip code de mayor a menor" << endl;
+    cin >> opcion;
+    cout << endl;
+
+    if(opcion < 1 || opcion > 3){
+      cout << "Por favor, seleccione una opcion valida" << endl;
+      cout << endl;
+    }
+
+    switch(opcion){
+      case 1:
+        censoHash(nombre);
+        break;
+      case 2:
+        ordenStack(nombre);
+        break;
+      case 3:
+        zipQueue(nombre);
+        break;
+    }
+
+  }while(opcion < 0 || opcion > 3);
+
+  
+
+
+
+
+
+
+  //cout << argv[0] << endl;
+  //cout << argv[1] << endl;
+  cout << "finito" << endl;  
 }
